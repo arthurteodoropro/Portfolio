@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ArrowUpRight, GitBranch, Menu, X } from 'lucide-react'
 
 const projects = [
@@ -45,6 +45,56 @@ const projects = [
 ]
 
 const filters = ['Todos', 'Web', 'IA', 'Dados', 'Educação']
+const heroPhrases = ["I'm Arthur Teodoro", "I'm a Developer", "I'm dreamer."]
+
+function HeroRotator() {
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [displayText, setDisplayText] = useState(heroPhrases[0])
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const currentPhrase = heroPhrases[phraseIndex]
+    const typingSpeed = isDeleting ? 45 : 85
+
+    const timeoutId = setTimeout(() => {
+      if (!isDeleting) {
+        const nextText = currentPhrase.slice(0, displayText.length + 1)
+        setDisplayText(nextText)
+
+        if (nextText === currentPhrase) {
+          setTimeout(() => setIsDeleting(true), 1100)
+        }
+      } else {
+        const nextText = currentPhrase.slice(0, displayText.length - 1)
+        setDisplayText(nextText)
+
+        if (nextText.length === 0) {
+          setIsDeleting(false)
+          setPhraseIndex((currentIndex) => (currentIndex + 1) % heroPhrases.length)
+        }
+      }
+    }, typingSpeed)
+
+    return () => clearTimeout(timeoutId)
+  }, [displayText, isDeleting, phraseIndex])
+
+  useEffect(() => {
+    const currentPhrase = heroPhrases[phraseIndex]
+    if (!isDeleting && displayText === currentPhrase) {
+      return undefined
+    }
+    if (isDeleting && displayText.length === 0) {
+      return undefined
+    }
+    return undefined
+  }, [displayText, isDeleting, phraseIndex])
+
+  useEffect(() => {
+    setDisplayText(heroPhrases[phraseIndex].slice(0, 1))
+  }, [phraseIndex])
+
+  return <span className="hero-rotator"><span className="hero-word">{displayText}</span><span className="typing-cursor" aria-hidden="true">|</span></span>
+}
 
 function ProjectVisual({ project }) {
   if (project.visual === 'physics') {
@@ -75,11 +125,10 @@ function App() {
       <header className="site-header">
         <a className="logo" href="#top" onClick={closeMenu}>AT<span>.</span></a>
         <nav className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
-          <a href="#trabalho" onClick={closeMenu}>Trabalho</a>
           <a href="#sobre" onClick={closeMenu}>Sobre</a>
+          <a href="#trabalho" onClick={closeMenu}>Trabalho</a>
           <a href="#contato" onClick={closeMenu}>Contato</a>
         </nav>
-        <a className="header-cta" href="https://github.com/arthurteodoropro" target="_blank" rel="noreferrer">GitHub <GitBranch size={15} /></a>
         <button className="menu-button" type="button" aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
@@ -88,22 +137,20 @@ function App() {
       <main id="top">
         <section className="hero-section">
           <div className="hero-copy">
-            <h1><em className="hello-world">HELLO WORLD</em><br /><span className="hero-name">I´m Arthur Teodoro</span></h1>
-            <a className="primary-button" href="#trabalho">Ver projetos <ArrowUpRight size={17} /></a>
-          </div>
-          <div className="hero-art" aria-label="Composição abstrata em amarelo e coral">
-            <div className="art-sun" />
-            <div className="art-disc" />
-            <div className="art-caption">01 / 04</div>
-            <div className="art-vertical">CURIOSIDADE É MÉTODO</div>
+            <h1>
+              <em className="hello-world">HELLO WORLD</em>
+              <br />
+              <span className="hero-name"><HeroRotator /></span>
+            </h1>
           </div>
         </section>
 
-        <section className="proof-strip" aria-label="Números do estúdio">
-          <p>Ferramentas que uso para construir <span>↘</span></p>
-          <div className="proof-item"><strong>JS</strong><span>interfaces e jogos</span></div>
-          <div className="proof-item"><strong>TS</strong><span>projetos web</span></div>
-          <div className="proof-item"><strong>PY</strong><span>dados e inteligência</span></div>
+        <section className="about-section" id="sobre">
+          <div className="about-text">
+            <h2><em>Olá!</em></h2>
+            <p>Sou estudante e desenvolvedor interessado em criar coisas que ensinam, explicam e funcionam. Transito entre interfaces, simulações, análise de dados e inteligência artificial.</p>
+            <a className="text-link" href="https://github.com/arthurteodoropro" target="_blank" rel="noreferrer">Ver perfil no GitHub <GitBranch size={16} /></a>
+          </div>
         </section>
 
         <section className="work-section" id="trabalho">
@@ -122,12 +169,6 @@ function App() {
               </article>
             ))}
           </div>
-        </section>
-
-        <section className="about-section" id="sobre">
-          <div className="about-sticker">feito com<br /><strong>curiosidade</strong> <span>✳</span></div>
-          <div className="about-text"><p className="section-kicker">Por trás do código</p><h2>Olá, eu sou<br /><em>Arthur.</em></h2><p>Sou estudante e desenvolvedor interessado em criar coisas que ensinam, explicam e funcionam. Transito entre interfaces, simulações, análise de dados e inteligência artificial.</p><a className="text-link" href="https://github.com/arthurteodoropro" target="_blank" rel="noreferrer">Ver perfil no GitHub <GitBranch size={16} /></a></div>
-          <div className="about-note"><span>Stack atual</span><p>JavaScript · TypeScript · Python · Java · React · Vite · Jupyter</p><div className="available"><i /> Aberto a aprender e construir</div></div>
         </section>
 
         <section className="contact-section" id="contato">
