@@ -168,6 +168,9 @@ h1 em, h2 em { color: #65e38b; font-family: 'DM Mono', monospace; font-style: no
 .social-button svg { fill: #fff; height: 30px; width: 30px; }
 .social-github { background: linear-gradient(135deg, #374151, #111827); border-color: rgba(156, 163, 175, .5); }
 .social-linkedin { background: linear-gradient(135deg, #2563eb, #1e40af); border-color: rgba(59, 130, 246, .5); }
+.social-whatsapp { background: #00d757; border-color: rgba(0, 215, 87, .6); }
+.social-email { background: linear-gradient(135deg, #ef4444, #991b1b); border-color: rgba(248, 113, 113, .6); }
+.social-static:hover { box-shadow: none; transform: none; }
 .about-gallery { height: 470px; position: relative; }
 .polaroid { background: #f1eee7; box-shadow: 10px 14px 0 rgba(0, 0, 0, .24); color: #182027; padding: 15px 15px 44px; position: absolute; width: clamp(220px, 24vw, 290px); }
 .polaroid img { aspect-ratio: 1 / 1.12; display: block; object-fit: cover; width: 100%; }
