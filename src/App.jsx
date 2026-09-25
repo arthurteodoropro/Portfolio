@@ -236,7 +236,16 @@ function App() {
         </section>
 
         <section className="contact-section" id="contato">
-          <h2>Vamos construir<br /><em>juntos.</em></h2><a className="contact-email" href="https://github.com/arthurteodoropro" target="_blank" rel="noreferrer">github.com/arthurteodoropro <ArrowUpRight size={24} /></a>
+          <h2>Vamos construir<br /><em>juntos?</em></h2>
+          <div className="contact-footer">
+            <div className="contact-links">
+            <a href="https://w.app/arthurteodoro" target="_blank" rel="noreferrer">+55 31 981007065</a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=arthurteodoro.pro@gmail.com" target="_blank" rel="noreferrer">arthurteodoro.pro@gmail.com</a>
+            <a href="https://www.linkedin.com/in/arthurteodorob/" target="_blank" rel="noreferrer">linkedin.com/in/arthurteodorob</a>
+            <a href="https://github.com/arthurteodoropro" target="_blank" rel="noreferrer">github.com/arthurteodoropro</a>
+            </div>
+            <span className="rights-reserved">© 2025 Arthur Teodoro. Todos os direitos reservados.</span>
+          </div>
         </section>
       </main>
     </div>
