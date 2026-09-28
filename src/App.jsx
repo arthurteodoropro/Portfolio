@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react'
 import foto1 from './assets/Foto1.jpeg'
 import foto2 from './assets/Foto2.jpeg'
+import githubIcon from './assets/Icons LP/github.png'
+import jsIcon from './assets/Icons LP/js.png'
+import pythonIcon from './assets/Icons LP/python.png'
+import reactIcon from './assets/Icons LP/react.png'
+import wordpressIcon from './assets/Icons LP/wordpress.png'
 
 const projects = [
   {
@@ -232,6 +237,13 @@ function App() {
                 </div>
               </article>
             ))}
+          </div>
+          <div className="stack-icons" aria-label="Tecnologias utilizadas">
+            <img src={githubIcon} alt="GitHub" />
+            <img src={jsIcon} alt="JavaScript" />
+            <img src={pythonIcon} alt="Python" />
+            <img src={reactIcon} alt="React" />
+            <img src={wordpressIcon} alt="WordPress" />
           </div>
         </section>
 
